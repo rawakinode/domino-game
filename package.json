@@ -1,0 +1,24 @@
+{
+  "name": "domino-game",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@flaticon/flaticon-uicons": "^3.3.1",
+    "@wagmi/core": "^2.16.5",
+    "ethers": "^5.7.2",
+    "phaser": "^3.88.2",
+    "vue": "^3.5.13",
+    "web3": "^4.16.0",
+    "web3modal": "^1.9.12"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.2.0"
+  }
+}

@@ -1,0 +1,828 @@
+[
+    {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "player",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "bool",
+                "name": "decision",
+                "type": "bool"
+            }
+        ],
+        "name": "Confirmation",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "creator",
+                "type": "address"
+            }
+        ],
+        "name": "GameCreated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "joiner",
+                "type": "address"
+            }
+        ],
+        "name": "GameJoined",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "creator",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "GameRefunded",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "winner",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "GameResult",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "player",
+                "type": "address"
+            }
+        ],
+        "name": "Surrender",
+        "type": "event"
+    },
+    {
+        "inputs": [],
+        "name": "claimFee",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "collectFee",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            }
+        ],
+        "name": "confirmContinue",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "enum DominoBalaPVP.BetTier",
+                "name": "tier",
+                "type": "uint8"
+            }
+        ],
+        "name": "createGame",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "fee",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "games",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "player1",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "player2",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "stakePerPlayer",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "totalStake",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bool",
+                "name": "p1Confirmed",
+                "type": "bool"
+            },
+            {
+                "internalType": "bool",
+                "name": "p2Confirmed",
+                "type": "bool"
+            },
+            {
+                "internalType": "bool",
+                "name": "completed",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint256",
+                "name": "createdAtBlock",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "joinedAtBlock",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bool",
+                "name": "surrenderP1",
+                "type": "bool"
+            },
+            {
+                "internalType": "bool",
+                "name": "surrenderP2",
+                "type": "bool"
+            },
+            {
+                "internalType": "address",
+                "name": "winner",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getAllGames",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "id",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "player1",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "player2",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "stakePerPlayer",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "totalStake",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "p1Confirmed",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "p2Confirmed",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "completed",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "createdAtBlock",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "joinedAtBlock",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "surrenderP1",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "surrenderP2",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "winner",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct DominoBalaPVP.Game[]",
+                "name": "",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "player",
+                "type": "address"
+            }
+        ],
+        "name": "getGamesByPlayer",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "id",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "player1",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "player2",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "stakePerPlayer",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "totalStake",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "p1Confirmed",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "p2Confirmed",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "completed",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "createdAtBlock",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "joinedAtBlock",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "surrenderP1",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "surrenderP2",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "winner",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct DominoBalaPVP.Game[]",
+                "name": "",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getMyDominoes",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint8",
+                        "name": "left",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "uint8",
+                        "name": "right",
+                        "type": "uint8"
+                    }
+                ],
+                "internalType": "struct DominoBalaPVP.Domino[2]",
+                "name": "",
+                "type": "tuple[2]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getOpenGames",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "id",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "player1",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "player2",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "stakePerPlayer",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "totalStake",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "p1Confirmed",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "p2Confirmed",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "completed",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "createdAtBlock",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "joinedAtBlock",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "surrenderP1",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "surrenderP2",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "winner",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct DominoBalaPVP.Game[]",
+                "name": "",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getSortedLeaderboard",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "player",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "games",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "win",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "lose",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "draw",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct DominoBalaPVP.Leaderboard[]",
+                "name": "",
+                "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "enum DominoBalaPVP.BetTier",
+                "name": "tier",
+                "type": "uint8"
+            }
+        ],
+        "name": "getStakeAmount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            }
+        ],
+        "name": "joinGame",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "leaderboard",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "player",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "games",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "win",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "lose",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "draw",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "openGames",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "playerWithIdGame",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "players",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            }
+        ],
+        "name": "refundExpiredGame",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            }
+        ],
+        "name": "removeGameById",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            }
+        ],
+        "name": "resolveGame",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "player",
+                "type": "address"
+            }
+        ],
+        "name": "showHandIfGameCompleted",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint8",
+                        "name": "left",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "uint8",
+                        "name": "right",
+                        "type": "uint8"
+                    }
+                ],
+                "internalType": "struct DominoBalaPVP.Domino[2]",
+                "name": "",
+                "type": "tuple[2]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "gameId",
+                "type": "uint256"
+            }
+        ],
+        "name": "surrender",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]
